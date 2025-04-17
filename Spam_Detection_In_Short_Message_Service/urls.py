@@ -32,7 +32,6 @@ urlpatterns = [
     path('RegisterUsersView/', admins.RegisterUsersView, name='RegisterUsersView'),
     path('ActivaUsers/', admins.ActivaUsers, name='ActivaUsers'),
     path('DeleteUser/', admins.DeleteUser, name='DeleteUser'),
-    #path("classification_result/", admins.classification_result, name="classification_result"),
 
 #User Views
 

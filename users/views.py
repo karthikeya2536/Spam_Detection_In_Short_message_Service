@@ -1,29 +1,12 @@
-from ast import alias
-from concurrent.futures import process
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
-
-import Spam_Detection_In_Short_Message_Service
 
 from .forms import UserRegistrationForm
 from .models import UserRegistrationModel
 from django.conf import settings
 import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-import matplotlib.ticker as plticker
-import datetime as dt
-from sklearn import preprocessing, metrics
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.linear_model import LinearRegression
-from sklearn import metrics
 from sklearn.metrics import classification_report
-from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
@@ -85,12 +68,7 @@ def logout(request):
         pass
     return redirect('index')
 
-def DatasetView(request):
-    from django.conf import settings
-    path = settings.MEDIA_ROOT + "//" + 'balanced_spam_dataset.csv'
-    df = pd.read_csv(path)
-    df = df.to_html
-    return render(request, 'users/viewdataset.html', {'data': df})
+# DatasetView function removed as it's not used in any URL pattern
 
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -100,16 +78,6 @@ from sklearn.metrics import accuracy_score, classification_report
 path = settings.MEDIA_ROOT + "//" + 'balanced_spam_dataset.csv'
 df = pd.read_csv(path)
 value_counts = df['Category'].value_counts()
-# print(value_counts)
-# import matplotlib.pyplot as plt
-# # Plotting the bar plot
-# value_counts.plot(kind='bar')
-# # Adding labels and title
-# plt.xlabel('Categories')
-# plt.ylabel('Counts')
-# plt.title('Value Counts of Your Column')
-# # Displaying the plot
-# plt.show()
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(df['Message'], df['Category'], test_size=0.2, random_state=42)
 # Vectorize the tweets using TF-IDF
@@ -121,12 +89,6 @@ nb_classifier = MultinomialNB()
 nb_classifier.fit(X_train_tfidf, y_train)
 
 def machine_learning(request):
-    # Adding labels and title
-    # plt.xlabel('Categories')
-    # plt.ylabel('Counts')
-    # plt.title('Value Counts of Your Column')
-    # Displaying the plot
-    # plt.show()
     predictions = nb_classifier.predict(X_test_tfidf)
     accuracy = accuracy_score(y_test, predictions)
     print(f"Accuracy: {accuracy:.2f}")
