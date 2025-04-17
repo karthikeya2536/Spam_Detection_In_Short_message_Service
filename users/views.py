@@ -127,6 +127,44 @@ def load_model():
 # Load the model when the module is imported
 model_loaded = load_model()
 
+# Test the model with known examples
+def test_model():
+    if not model_loaded or tfidf_vectorizer is None or nb_classifier is None:
+        logger.error("Cannot test model - model not loaded")
+        return
+
+    # Test with known spam examples
+    spam_examples = [
+        "URGENT! Your Mobile No was awarded a £2,000 Bonus Caller Prize! Call now to claim",
+        "Congratulations! You've won a free gift card. Click here to claim",
+        "Free entry to win a new car! Text WIN to 12345"
+    ]
+
+    # Test with known ham examples
+    ham_examples = [
+        "Hey, what time are we meeting for dinner tonight?",
+        "Don't forget to pick up milk on your way home",
+        "The meeting has been rescheduled to 3pm tomorrow"
+    ]
+
+    logger.info("Testing model with known examples:")
+
+    # Test spam examples
+    for i, example in enumerate(spam_examples):
+        example_tfidf = tfidf_vectorizer.transform([example])
+        prediction = nb_classifier.predict(example_tfidf)[0]
+        logger.info(f"Spam example {i+1}: '{example[:30]}...' - Predicted: {prediction}")
+
+    # Test ham examples
+    for i, example in enumerate(ham_examples):
+        example_tfidf = tfidf_vectorizer.transform([example])
+        prediction = nb_classifier.predict(example_tfidf)[0]
+        logger.info(f"Ham example {i+1}: '{example[:30]}...' - Predicted: {prediction}")
+
+# Run the test if the model is loaded
+if model_loaded:
+    test_model()
+
 def machine_learning(request):
     if not model_loaded or nb_classifier is None or X_test_tfidf is None or y_test is None:
         # Try to load the model again
@@ -178,12 +216,13 @@ def prediction(request):
 
             # Make prediction
             single_prediction = nb_classifier.predict(single_tweet_tfidf)
-            logger.info(f"Prediction result: {single_prediction[0]}")
+            logger.info(f"Raw prediction result: {single_prediction[0]}, type: {type(single_prediction[0])}")
 
-            # Convert numerical prediction to text
-            if single_prediction[0] == 0:
+            # The model is trained on 'ham' and 'spam' labels directly
+            # so we just need to convert 'ham' to 'non-spam' for display
+            if single_prediction[0] == 'spam':
                 single_prediction = 'spam'
-            elif single_prediction[0] == 1:
+            elif single_prediction[0] == 'ham':
                 single_prediction = 'non-spam'
             else:
                 single_prediction = f'unknown-{single_prediction[0]}'
