@@ -1,0 +1,16 @@
+{% extends 'admins/adminbase.html'%}
+{%block contents%}<br><br><br><br><br>
+
+
+ <section class="hero">
+    <div class="hero-content">
+      <h1 class="text-center">Welcome to Admin Dashboard</h1>
+      <p class="lead text-center">Manage users and system settings</p>
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-4 mb-3">
+          <a href="{% url 'RegisterUsersView' %}" class="btn btn-primary btn-block">Manage Users</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{%endblock%}<br><br><br><br><br><br>

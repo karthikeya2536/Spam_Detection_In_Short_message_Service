@@ -1,0 +1,61 @@
+{% extends 'users/userbase.html' %}
+{% load static %}
+
+{% block contents %}
+
+<style>
+    /* Simple styling for accuracy card */
+    .performance-card {
+        animation: fadeIn 0.8s ease-in-out;
+        border: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-top: 50px;
+    }
+
+    .display-1 {
+        font-size: 6rem;
+        font-weight: 700;
+        color: #4e73df;
+    }
+
+    .accuracy-percentage {
+        font-size: 1.5rem;
+        color: #5a5c69;
+        margin-top: 20px;
+    }
+
+    .card-header i {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card performance-card animate-on-scroll">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0 text-center"><i class="fas fa-chart-line mr-2 pulse-icon"></i>Model Performance</h4>
+                </div>
+                <div class="card-body text-center py-5">
+                    <h5 class="mb-4 slide-down delay-300">Accuracy Score</h5>
+                    <div class="display-1 mb-3 slide-up delay-500 text-gradient">{{ acc }}</div>
+                    <p class="accuracy-percentage slide-right delay-700">{{ acc|floatformat:2|stringformat:"s"|slice:"2:" }}% of predictions are correct</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<style>
+    /* Premium form styling for registration */
+    .registration-form-container p {
+        margin-bottom: 1.25rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .registration-form-container label {
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .registration-form-container input {
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+        background-color: #ffffff;
+    }
+
+    .registration-form-container input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+        outline: none;
+    }
+
+    /* Icon positioning */
+    .registration-form-container p {
+        position: relative;
+    }
+
+    .registration-form-container p::before {
+        position: absolute;
+        left: 1rem;
+        top: 2.4rem;
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color: var(--primary-color);
+        z-index: 10;
+    }
+
+    .registration-form-container p:nth-child(1)::before { content: '\f007'; } /* User */
+    .registration-form-container p:nth-child(2)::before { content: '\f2bd'; } /* ID */
+    .registration-form-container p:nth-child(3)::before { content: '\f023'; } /* Lock */
+    .registration-form-container p:nth-child(4)::before { content: '\f10b'; } /* Mobile */
+    .registration-form-container p:nth-child(5)::before { content: '\f0e0'; } /* Email */
+    .registration-form-container p:nth-child(6)::before { content: '\f3c5'; } /* Location */
+</style>
+
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh; padding-top: 80px; background: var(--bg-premium-blue); position: relative; overflow: hidden; width: 100%;">
+    <!-- Premium background elements -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%23ffffff\' fill-opacity=\'0.05\' fill-rule=\'evenodd\'/%3E%3C/svg%3E'); opacity: 0.5;"></div>
+    <div style="position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(75, 108, 183, 0.1) 0%, rgba(24, 40, 72, 0) 70%); border-radius: 50%;"></div>
+    <div style="position: absolute; bottom: -50%; left: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(75, 108, 183, 0.1) 0%, rgba(24, 40, 72, 0) 70%); border-radius: 50%;"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Premium branding section -->
+            <div class="text-center mb-4 fade-in">
+                <div style="background: var(--primary-color); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                    <i class="fas fa-user-plus" style="color: white; font-size: 1.8rem;"></i>
+                </div>
+                <h1 style="font-size: 1.8rem; font-weight: 600; margin-top: 1rem; letter-spacing: -0.02em; color: white; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">Create Account</h1>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; max-width: 400px; margin: 0.5rem auto 0; font-weight: 300;">Join our community to access spam detection tools</p>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.1s;">
+                <div class="card-body p-4">
+                    {% if messages %}
+                    <div class="alert alert-info mb-4">
+                        {% for message in messages %}
+                        {{ message }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <form method="post" action="{% url 'UserRegisterActions' %}">
+                        {% csrf_token %}
+                        <div class="registration-form-container">
+                            {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block py-2 mt-4" style="height: 48px;">Create Account</button>
+
+                        <div class="text-center mt-4">
+                            <a href="{% url 'UserLogin' %}" style="color: var(--primary-color); text-decoration: none; font-weight: 500; font-size: 0.95rem;">
+                                <i class="fas fa-sign-in-alt mr-1"></i> Already have an account? Sign in
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Premium footer section -->
+            <div class="text-center mt-4 fade-in" style="animation-delay: 0.2s;">
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                    <i class="fas fa-shield-alt mr-1" style="color: var(--primary-color);"></i> Your data is secure with Spam Shield
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{%endblock%}

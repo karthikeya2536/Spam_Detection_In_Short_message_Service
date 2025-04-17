@@ -1,0 +1,82 @@
+{% extends 'users/userbase.html'%}
+{% block contents %}
+<style>
+    .jumbotron {
+        animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .feature-card-left {
+        animation: slideInLeft 0.8s ease-in-out;
+        animation-delay: 0.2s;
+        animation-fill-mode: both;
+    }
+
+    .feature-card-right {
+        animation: slideInRight 0.8s ease-in-out;
+        animation-delay: 0.4s;
+        animation-fill-mode: both;
+    }
+
+    .about-card {
+        animation: fadeIn 1s ease-in-out;
+        animation-delay: 0.6s;
+        animation-fill-mode: both;
+    }
+
+    .fa-3x {
+        animation: pulse 2s infinite;
+    }
+</style>
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-white shadow-sm">
+            <h1 class="display-4 text-center">Welcome, {{ request.session.loggeduser }}!</h1>
+            <p class="lead text-center">Use our advanced machine learning tools to detect spam in text messages.</p>
+            <hr class="my-4">
+            <p class="text-center">Select one of the options below to get started with spam detection.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm feature-card-left">
+                    <div class="card-body text-center">
+                        <i class="fas fa-search fa-3x mb-3 text-primary"></i>
+                        <h5 class="card-title">Predict Spam</h5>
+                        <p class="card-text">Analyze text messages to determine if they are spam or legitimate.</p>
+                        <a href="{% url 'prediction' %}" class="btn btn-primary">Start Prediction</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm feature-card-right">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+                        <h5 class="card-title">Analysis</h5>
+                        <p class="card-text">View performance metrics and analysis of our spam detection model.</p>
+                        <a href="{% url 'machine_learning' %}" class="btn btn-primary">View Analysis</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card shadow-sm about-card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">About Spam Detection</h5>
+            </div>
+            <div class="card-body">
+                <p>Our spam detection system uses a Multinomial Naive Bayes classifier with TF-IDF vectorization to identify spam messages with high accuracy. The system has been trained on a balanced dataset of spam and non-spam messages.</p>
+                <p>Use the prediction tool to analyze any text and determine if it's likely to be spam or not. You can also view performance metrics to understand how the model works.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

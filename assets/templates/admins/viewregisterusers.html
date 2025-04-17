@@ -1,0 +1,59 @@
+{% extends 'admins/adminbase.html'%}
+{%block contents%}<br><br><br><br><br><br><br><br><br><br>
+
+ <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">User Management</h2>
+
+      {% if messages %}
+      <div class="alert alert-success mb-4">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Name</th>
+              <th>Login ID</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>Locality</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in data %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{i.name}}</td>
+              <td>{{i.loginid}}</td>
+              <td>{{i.mobile}}</td>
+              <td>{{i.email}}</td>
+              <td>{{i.locality}}</td>
+              <td>
+                <span class="badge {% if i.status == 'waiting' %}bg-warning{% else %}bg-success{% endif %}">
+                  {{i.status}}
+                </span>
+              </td>
+              <td>
+                <div class="btn-group" role="group">
+                  {% if i.status == 'waiting' %}
+                  <a href="/ActivaUsers/?uid={{ i.id }}" class="btn btn-sm btn-success">Activate</a>
+                  {% endif %}
+                  <a href="/DeleteUser/?uid={{ i.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+{%endblock%}
