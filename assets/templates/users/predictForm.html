@@ -171,6 +171,8 @@
                 <div class="alert alert-danger mb-4">
                     <h5 class="alert-heading"><i class="fas fa-exclamation-circle mr-2"></i>Error</h5>
                     <p class="mb-0">{{ error }}</p>
+                    <hr>
+                    <p class="mb-0">Please try again or contact the administrator if the problem persists.</p>
                 </div>
                 {% endif %}
 
@@ -187,6 +189,16 @@
                         </h1>
                         <p class="lead mb-0 slide-up delay-500">This message is classified as <strong class="text-gradient">{{ output|title }}</strong></p>
                     </div>
+                    {% if input_text %}
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0"><i class="fas fa-file-alt mr-2"></i>Analyzed Text</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-0">{{ input_text }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
                 {% endif %}
 
@@ -201,7 +213,7 @@
                             required
                             rows="6"
                             placeholder="Type or paste your text here..."
-                        ></textarea>
+                        >{% if input_text %}{{ input_text }}{% endif %}</textarea>
                         <small class="form-text text-muted slide-right delay-500">Enter any text message to analyze whether it's spam or not.</small>
                     </div>
                     <div class="text-center mt-4 slide-up delay-600">
@@ -217,7 +229,7 @@
             <div class="card-header bg-light">
                 <h5 class="mb-0"><i class="fas fa-cogs mr-2"></i>How It Works</h5>
             </div>
-            <div class="card-body"> 
+            <div class="card-body">
                 <p>Our premium spam detection system uses a sophisticated Multinomial Naive Bayes classifier with TF-IDF vectorization to analyze text content with industry-leading accuracy. The system has been trained on a comprehensive dataset of spam and legitimate messages.</p>
 
                 <div class="row mt-4">
